@@ -1,3 +1,4 @@
 rootProject.name = 'echo'
 include 'echo-text-service'
 include 'echo-voice-service'
+include 'echo-user'
