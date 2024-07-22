@@ -1,0 +1,14 @@
+### GET request to example server
+POST localhost:8080/users
+Content-Type: application/json
+
+{
+  "username": "asdf",
+  "password": "asdf",
+  "email": "asdf@test.com",
+  "intro": "intro"
+}
+
+### 유저 정보 가져오기
+GET localhost:8080/users/1
+Content-Type: application/json
