@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>WebRTC Voice Chat</title>
+    </head>
+    <body>
+    <h1>WebRTC Voice Chat</h1>
+    <button id="startButton">Start Voice Chat</button>
+    <audio id="localAudio" autoplay></audio>
+    <audio id="remoteAudio" autoplay></audio>
+
+    <script>
+        const signalingServerUrl = 'ws://localhost:8080/api/voice';
+        const startButton = document.getElementById('startButton');
+        const signalingSocket = new WebSocket(signalingServerUrl);
+
+        let localStream;
+        const peerConnections = {};
+        const remoteAudios = document.getElementById('remoteAudios');
+
+        const configuration = {
+            iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+        };
+
+        startButton.onclick = async () => {
+            localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            document.getElementById('localAudio').srcObject = localStream;
+
+            signalingSocket.send(JSON.stringify({ type: 'join' }));
+        };
+
+        signalingSocket.onmessage = async (message) => {
+            const data = JSON.parse(message.data);
+            switch (data.type) {
+                case 'new-peer':
+                    createPeerConnection(data.id);
+                    const offer = await peerConnections[data.id].createOffer();
+                    await peerConnections[data.id].setLocalDescription(offer);
+                    signalingSocket.send(JSON.stringify({ type: 'offer', sdp: offer, id: data.id }));
+                    break;
+                case 'offer':
+                    createPeerConnection(data.id);
+                    await peerConnections[data.id].setRemoteDescription(new RTCSessionDescription(data.sdp));
+                    const answer = await peerConnections[data.id].createAnswer();
+                    await peerConnections[data.id].setLocalDescription(answer);
+                    signalingSocket.send(JSON.stringify({ type: 'answer', sdp: answer, id: data.id }));
+                    break;
+                case 'answer':
+                    await peerConnections[data.id].setRemoteDescription(new RTCSessionDescription(data.sdp));
+                    break;
+                case 'ice-candidate':
+                    await peerConnections[data.id].addIceCandidate(new RTCIceCandidate(data.candidate));
+                    break;
+                case 'leave':
+                    if (peerConnections[data.id]) {
+                        peerConnections[data.id].close();
+                        delete peerConnections[data.id];
+                        const audioElement = document.getElementById(`remoteAudio-${data.id}`);
+                        if (audioElement) {
+                            audioElement.remove();
+                        }
+                    }
+                    break;
+            }
+        };
+
+        function createPeerConnection(id) {
+            if (peerConnections[id]) {
+                return;
+            }
+
+            const peerConnection = new RTCPeerConnection(configuration);
+            peerConnections[id] = peerConnection;
+
+            peerConnection.onicecandidate = (event) => {
+                if (event.candidate) {
+                    signalingSocket.send(JSON.stringify({ type: 'ice-candidate', candidate: event.candidate, id }));
+                }
+            };
+
+            peerConnection.ontrack = (event) => {
+                let audioElement = document.getElementById(`remoteAudio-${id}`);
+                if (!audioElement) {
+                    audioElement = document.createElement('audio');
+                    audioElement.id = `remoteAudio-${id}`;
+                    audioElement.autoplay = true;
+                    remoteAudios.appendChild(audioElement);
+                }
+                audioElement.srcObject = event.streams[0];
+            };
+
+            localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+        }
+    </script>
+
+    </body>
+</html>
