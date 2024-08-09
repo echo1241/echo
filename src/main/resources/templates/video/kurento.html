@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo Video Call</title>
+</head>
+
+<body>
+    <h1>Echo Video Call</h1>
+    <button onclick="startCall()">Start Call</button>
+    <button onclick="endCall()">End Call</button>
+    <video id="localVideo" autoplay muted></video>
+    <video id="remoteVideo" autoplay></video>
+
+    <script>
+        let socket;
+        let localStream;
+        let remoteStream;
+        let peerConnection;
+        const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+        const localVideo = document.getElementById('localVideo');
+        const videoContainer = document.getElementById('videoContainer');
+        const processedStreams = new Set();
+
+        function startCall() {
+            socket = new WebSocket('ws://localhost:8080/api/signaling');
+
+            socket.onopen = handleSocketOpen;
+            socket.onmessage = handleSocketMessage;
+            socket.onclose = handleSocketClose;
+            socket.onerror = handleSocketError;
+        }
+
+        function handleSocketOpen(event) {
+            console.log("WebSocket 연결");
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                .then(stream => {
+                    console.log("LocalStream 설정");
+                    localStream = stream;
+                    localVideo.srcObject = localStream;
+                    makePeerConnection();
+                    peerConnection.addStream(localStream);
+                })
+                .catch(error => console.error("Media Device 연결 오류: ", error));
+        }
+
+        function handleSocketMessage(event) {
+            const message = JSON.parse(event.data);
+            if (message.type === 'answer') {
+                handleAnswer(message.sdp);
+            } else if (message.type === 'candidate') {
+                handleNewICECandidate(message.candidate);
+            }
+        }
+
+        function handleSocketClose(event) {
+            console.log("WebSocket 연결 끊김");
+        }
+
+        function handleSocketError(error) {
+            console.error("WebSocket 오류: ", error);
+        }
+
+        function endCall() {
+            if (peerConnection) {
+                peerConnection.close();
+                peerConnection = null;
+            }
+
+            const remoteVideos = videoContainer.querySelectorAll('video');
+            remoteVideos.forEach(video => video.remove());
+
+            if (socket) {
+                socket.close();
+            }
+
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+                localStream = null;
+            }
+
+            localVideo.srcObject = null;
+
+            processedStreams.clear();
+        }
+
+        function makePeerConnection() {
+            console.log("PeerConnection 생성");
+            peerConnection = new RTCPeerConnection(configuration);
+            console.log("Initial ICE Gathering State: ", peerConnection.iceGatheringState);
+
+            peerConnection.addEventListener('icegatheringstatechange', event => {
+                console.log(`ICE Gathering State: ${peerConnection.iceGatheringState}`);
+            });
+
+            peerConnection.onicecandidate = event => {
+                console.log("event: ", event);
+                console.log("event.candidate: ", event.candidate);
+                if (event.candidate) {
+                    console.log("ICE 후보 정보 전송");
+                    socket.send(JSON.stringify({
+                        type: 'candidate',
+                        candidate: event.candidate.candidate,
+                        sdpMid: event.candidate.sdpMid,
+                        sdpMLineIndex: event.candidate.sdpMLineIndex
+                    }));
+                }
+            };
+
+            peerConnection.ontrack = event => {
+                console.log("event: ", event);
+                console.log("event.streams: ", event.streams);
+                if (processedStreams.has(event.streams[0].id)) return;
+                processedStreams.add(event.streams[0].id);
+                const remoteVideo = document.createElement('video');
+                remoteVideo.autoplay = true;
+                videoContainer.append(remoteVideo);
+                remoteVideo.srcObject = event.streams[0];
+            };
+
+            peerConnection.createOffer()
+                .then(offer => {
+                    console.log("Offer 생성 및 LocalDescription 설정");
+                    return peerConnection.setLocalDescription(offer);
+                })
+                .then(() => {
+                    console.log("LocalDescription 설정 확인:", peerConnection.localDescription);
+                    console.log("Offer 생성 및 전송");
+                    socket.send(JSON.stringify({
+                        type: 'offer',
+                        sdp: peerConnection.localDescription.sdp
+                    }));
+                })
+                .catch(error => console.error("Offer 생성 또는 LocalDescription 설정 오류: ", error));
+        }
+
+        function handleAnswer(sdp) {
+            console.log("Answer 수신");
+            peerConnection.setRemoteDescription(new RTCSessionDescription({
+                type: 'answer',
+                sdp: sdp
+            }))
+                .then(() => {
+                    console.log("RemoteDescription 설정 확인:", peerConnection.remoteDescription);
+                })
+                .catch(error => console.error("RemoteDescription 설정 오류: ", error));
+            console.log("RemoteDescription 설정");
+        }
+
+        function handleNewICECandidate(candidate) {
+            console.log("ICE 후보 수신");
+            peerConnection.addIceCandidate(new RTCIceCandidate(candidate))
+                .catch(error => console.error("ICE 후보 추가 오류: ", error));
+            console.log("새로운 ICE 후보 추가");
+        }
+    </script>
+</body>
+
+</html>

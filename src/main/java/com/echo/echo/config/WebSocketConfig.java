@@ -1,6 +1,7 @@
 package com.echo.echo.config;
 
 import com.echo.echo.domain.text.controller.TextWebSocketHandler;
+import com.echo.echo.domain.video.SignalingHandler;
 import com.echo.echo.domain.video.VideoHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +21,12 @@ public class WebSocketConfig {
 
     private final TextWebSocketHandler textHandler;
     private final VideoHandler videoHandler;
+    private final SignalingHandler signalingHandler;
 
     @Bean
     public HandlerMapping handlerMapping() {
         Map<String, WebSocketHandler> map = new HashMap<>();
+        map.put("/signaling/**", signalingHandler);
         map.put("/video/**", videoHandler);
         map.put("/text", textHandler);
 

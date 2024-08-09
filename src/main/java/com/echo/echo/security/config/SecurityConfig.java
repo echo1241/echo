@@ -62,6 +62,7 @@ public class SecurityConfig {
                         .pathMatchers(HttpMethod.POST, "/users/signup", "/users/activate/**", "/auth/**").permitAll()
                         .pathMatchers(HttpMethod.POST, "/users/find/id", "/users/find/password", "/users/verify/**").permitAll()
                         .pathMatchers("/users/change/password/**").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/signaling/**").permitAll()
                         .pathMatchers(HttpMethod.GET, "/video/**").permitAll()
                         .pathMatchers(HttpMethod.GET, "/text/**").permitAll()
                         .anyExchange().authenticated()
@@ -88,7 +89,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://127.0.0.1:5500")); // 프론트엔드 주소
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://127.0.0.1:5500", "https://29f7-1-237-90-238.ngrok-free.app")); // 프론트엔드 주소
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);

@@ -57,6 +57,9 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
     testRuntimeOnly 'org.mariadb:r2dbc-mariadb'
+
+    // Kurento
+    implementation 'org.kurento:kurento-client:6.15.0'
 }
 
 tasks.named('test') {
