@@ -1,6 +1,7 @@
 package com.echo.echo.domain.thread;
 
 import com.echo.echo.common.util.ObjectStringConverter;
+import com.echo.echo.common.websocket.AbstractWebSocketHandler;
 import com.echo.echo.common.websocket.CommonWebSocketHandler;
 import com.echo.echo.domain.thread.dto.ThreadMessageRequestDto;
 import com.echo.echo.domain.thread.service.ThreadWebSocketService;
@@ -21,18 +22,27 @@ import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
-public class ThreadWebSocketHandler implements CommonWebSocketHandler {
+public class ThreadWebSocketHandler extends AbstractWebSocketHandler {
 
     private final ThreadFacade threadFacade;
     private final ThreadWebSocketService threadWebsocketService;
     private final ObjectStringConverter objectStringConverter;
 
+    Long threadId;
+    Long spaceId;
+
     @Override
-    public Mono<Void> receive(Mono<User> user, Map<String, String> queryParams, String payload) {
-        Long spaceId = Long.valueOf(queryParams.get("spaceId"));
-        Long threadId = Long.valueOf(queryParams.get("threadId"));
+    public void init(WebSocketSession webSocketSession, Map<String, String> queryParams, Mono<User> userMono) {
+        super.init(webSocketSession, queryParams, userMono);
+        this.threadId = Long.valueOf(queryParams.get("threadId"));
+        this.spaceId = Long.valueOf(queryParams.get("spaceId"));
+    }
+
+    @Override
+    public Mono<Void> receive(String payload) {
+        Mono<User> userMono = this.getUserMono();
         return objectStringConverter.stringToObject(payload, ThreadMessageRequestDto.class)
-                .flatMap(req -> user
+                .flatMap(req -> userMono
                         .flatMap(u -> threadFacade.saveThreadMessage(spaceId, u, threadId, req))
                 )
                 .flatMap(threadWebsocketService::publishMessage)
@@ -40,8 +50,7 @@ public class ThreadWebSocketHandler implements CommonWebSocketHandler {
     }
 
     @Override
-    public Flux<String> send(Map<String, String> queryParams) {
-        Long threadId = Long.valueOf(queryParams.get("threadId"));
+    public Flux<String> send() {
         return threadWebsocketService.sendMessage(threadId);
     }
 }
