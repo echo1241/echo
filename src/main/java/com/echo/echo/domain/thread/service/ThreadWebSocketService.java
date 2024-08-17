@@ -7,7 +7,9 @@ import com.echo.echo.domain.thread.dto.ThreadMessageResponseDto;
 import com.echo.echo.domain.thread.repository.ThreadWebSocketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Sinks;
 
@@ -49,16 +51,11 @@ public class ThreadWebSocketService {
 
     /**
      * 실제 세션에게 메시지를 전송한다.
-     * @param session 웹소켓 세션
      * @param threadId 스레드 고유 번호
      */
-    public Mono<Void> sendMessage(WebSocketSession session, Long threadId) {
+    public Flux<String> sendMessage(Long threadId) {
         Sinks.Many<ThreadMessageResponseDto> threadMessageSinks = threadWebsocketRepository.getSinks(threadId);
-        return session.send(
-                threadMessageSinks.asFlux()
-                        .flatMap(objectStringConverter::objectToString)
-                        .map(session::textMessage)
-                )
-                .then();
+        return threadMessageSinks.asFlux()
+                        .flatMap(objectStringConverter::objectToString);
     }
 }
