@@ -65,10 +65,8 @@ public class SecurityConfig {
                         .pathMatchers(HttpMethod.POST, "/users/find/id", "/users/find/password", "/users/verify/**").permitAll()
                         .pathMatchers("/users/change/password/**").permitAll()
                         .pathMatchers(HttpMethod.GET, "/video/**").permitAll()
-                        .pathMatchers(HttpMethod.GET, "/text/**").permitAll()
                         .pathMatchers("/actuator/health").permitAll()
                         .pathMatchers("/user/kakao/callback").permitAll()
-                        .pathMatchers("/threads/**").permitAll()
                         .anyExchange().authenticated()
                 )
                 .addFilterAt(authenticationWebFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
@@ -91,6 +89,7 @@ public class SecurityConfig {
                 .flatMap(token -> Mono.justOrEmpty(jwtProvider.getAuthentication(token)))
                 .onErrorResume(err -> Mono.error(new CustomException(CommonErrorCode.UNAUTHORIZED)));
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

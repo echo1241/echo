@@ -107,6 +107,13 @@ public class JwtProvider {
 
     public Mono<String> resolveToken(ServerHttpRequest request) {
         return Mono.justOrEmpty(request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION))
+                .switchIfEmpty(Mono.fromCallable(() -> {
+                    // url로 토큰 검사
+                    if (request.getQueryParams().get("token") != null) {
+                        return HEADER_PREFIX + request.getQueryParams().get("token").getFirst();
+                    }
+                    return null;
+                }))
                 .flatMap(token -> {
                     if (token.startsWith(HEADER_PREFIX)) {
                         return Mono.just(token.substring(HEADER_PREFIX.length()));
