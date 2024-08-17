@@ -3,70 +3,58 @@ package com.echo.echo.domain.text.dto;
 import com.echo.echo.domain.text.entity.Text;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class TextResponse {
 
     private String id;
     private Long channelId;
-    private Text.TextType textType;
+    private Text.TextType type;
     private String dmId; // 추가된 필드
     private String contents;
     private Long userId;
     private String username;
-    private TextResponse.HandleType handleType;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdAt;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime modifiedAt;
 
     public TextResponse(Text text) {
         this.id = text.getId();
-        this.textType = text.getType();
+        this.type = text.getType();
         this.contents = text.getContents();
         this.channelId = text.getChannelId();
-        this.dmId = text.getDmId();
+        this.dmId = text.getDmId(); // 추가된 필드 초기화
         this.userId = text.getUserId();
         this.username = text.getUsername();
         this.createdAt = text.getCreatedAt();
-        this.modifiedAt = text.getModifiedAt();
     }
 
     @JsonCreator
     public TextResponse(@JsonProperty("id") String id,
                         @JsonProperty("channelId") Long channelId,
-                        @JsonProperty("textType") Text.TextType textType,
-                        @JsonProperty("dmId") String dmId,
+                        @JsonProperty("type") Text.TextType type,
+                        @JsonProperty("dmId") String dmId, // 추가된 필드
                         @JsonProperty("contents") String contents,
                         @JsonProperty("username") String username,
-                        @JsonProperty("handleType") TextResponse.HandleType handleType,
-                        @JsonProperty("createdAt") LocalDateTime createdAt,
-                        @JsonProperty("modifiedAt") LocalDateTime modifiedAt) {
+                        @JsonProperty("createdAt") LocalDateTime createdAt) {
         this.id = id;
         this.channelId = channelId;
-        this.textType = textType;
-        this.dmId = dmId;
+        this.type = type;
+        this.dmId = dmId; // 추가된 필드 초기화
         this.contents = contents;
         this.username = username;
-        this.handleType = handleType;
         this.createdAt = createdAt;
-        this.modifiedAt = modifiedAt;
-    }
-
-    public enum HandleType {
-        CREATED, UPDATED, DELETED
     }
 }
