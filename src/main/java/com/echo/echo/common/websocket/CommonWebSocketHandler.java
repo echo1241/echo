@@ -2,6 +2,7 @@ package com.echo.echo.common.websocket;
 
 import com.echo.echo.domain.user.entity.User;
 import org.reactivestreams.Subscription;
+import org.springframework.web.reactive.socket.WebSocketSession;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.SignalType;
@@ -9,11 +10,11 @@ import reactor.core.publisher.SignalType;
 import java.util.Map;
 
 public interface CommonWebSocketHandler {
-    Mono<Void> receive(Mono<User> user, Map<String, String> queryParams, String payload);
-    Flux<String> send(Map<String, String> queryParams);
-    default Mono<Void> sendTyping() {return Mono.empty();};
-    default void init() {};
-    default void doOnSubscribe(Subscription subscription) {};
-    default void doFinally(SignalType signal) {};
-    default void doOnError(Throwable e) {};
+    Mono<Void> receive(String payload);
+    Flux<String> send();
+    Mono<Void> sendTyping(String payload);
+    void init(WebSocketSession webSocketSession, Map<String, String> queryParams, Mono<User> userMono);
+    void doOnSubscribe(Subscription subscription);
+    void doFinally(SignalType signal);
+    void doOnError(Throwable e);
 }

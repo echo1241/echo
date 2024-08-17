@@ -25,7 +25,7 @@ public class WebSocketConfig {
     public HandlerMapping handlerMapping(TextWebSocketHandler textHandler, VideoHandler videoHandler, ThreadWebSocketHandler threadWebSocketHandler) {
         Map<String, WebSocketHandler> map = new HashMap<>();
         map.put("/video/**", videoHandler);
-        map.put("/text", textHandler);
+        map.put("/text", new WebSocketHandlerTemplate(textHandler));
         map.put("/threads", new WebSocketHandlerTemplate(threadWebSocketHandler));
 
 		SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();

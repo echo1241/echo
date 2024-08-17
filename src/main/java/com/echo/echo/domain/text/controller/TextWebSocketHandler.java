@@ -89,8 +89,8 @@ public class TextWebSocketHandler implements WebSocketHandler {
 								dmService.sendTextToDm(request, username, userId, dmId, Text.TextType.TEXT) :
 								textService.sendText(request, username, userId, channelId, Text.TextType.TEXT))
 								.flatMap(response -> {
-									response.setHandleType(TextResponse.HandleType.CREATED);
-									return redisPublisher.publish(RedisConst.TEXT.getChannelTopic(), response);
+                                    response.setHandleType(TextResponse.HandleType.CREATED);
+                                    return redisPublisher.publish(RedisConst.TEXT.getChannelTopic(), response);
 								});
 						}
 					})

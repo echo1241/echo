@@ -14,7 +14,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
+@Slf4j(topic = "WebSocketHandlerTemplate")
 @RequiredArgsConstructor
 public class WebSocketHandlerTemplate implements WebSocketHandler {
 
@@ -27,7 +27,7 @@ public class WebSocketHandlerTemplate implements WebSocketHandler {
         // 여기에 공통적으로 들어가는 것을 지정합니다.
         Map<String, String> uriQuery = getParamFromSession(session.getHandshakeInfo().getUri());
 
-        commonWebSocketHandler.init();
+        commonWebSocketHandler.init(session, uriQuery, getUser());
 
         // receive()
         Mono<Void> receive = session.receive()
@@ -38,10 +38,10 @@ public class WebSocketHandlerTemplate implements WebSocketHandler {
                         return Mono.empty();
                     // 타이핑 처리
                     } else if (payload.contains(TYPING_MSG)) {
-                        return commonWebSocketHandler.sendTyping();
+                        return commonWebSocketHandler.sendTyping(payload);
                     // 그 이외
                     } else {
-                        return commonWebSocketHandler.receive(getUser(), uriQuery, payload);
+                        return commonWebSocketHandler.receive(payload);
                     }
                 })
                 // 접속 시 처음 실행
@@ -60,7 +60,7 @@ public class WebSocketHandlerTemplate implements WebSocketHandler {
                 .then();
 
         // send()
-        Mono<Void> send = session.send(commonWebSocketHandler.send(uriQuery)
+        Mono<Void> send = session.send(commonWebSocketHandler.send()
                 .map(session::textMessage));
 
         return Mono.when(receive, send);
