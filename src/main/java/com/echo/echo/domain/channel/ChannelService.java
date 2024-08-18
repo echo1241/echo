@@ -83,7 +83,8 @@ public class ChannelService {
 	public Mono<ChannelResponseDto> decrementMemberCount(Long channelId) {
 		return channelRepository.findById(channelId)
 			.flatMap(channel -> channel.decrementMemberCount()
-				.flatMap(channelRepository::save))
+				.flatMap(channelRepository::save)
+					.doOnNext(data -> System.out.println("채팅방 나갔음")))
 			.as(transactionalOperator::transactional)
 			.map(this::toChannelResponseDto);
 	}

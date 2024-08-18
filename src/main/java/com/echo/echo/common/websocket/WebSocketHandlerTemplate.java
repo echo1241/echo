@@ -5,6 +5,7 @@ import com.echo.echo.security.principal.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
@@ -29,17 +30,16 @@ public class WebSocketHandlerTemplate implements WebSocketHandler {
 
         commonWebSocketHandler.init(session, uriQuery, getUser());
 
-        // receive()
         Mono<Void> receive = session.receive()
                 .map(WebSocketMessage::getPayloadAsText)
                 .flatMap(payload -> {
                     // ping 처리
                     if (payload.contains(PING_MSG)) {
                         return Mono.empty();
-                    // 타이핑 처리
+                        // 타이핑 처리
                     } else if (payload.contains(TYPING_MSG)) {
                         return commonWebSocketHandler.sendTyping(payload);
-                    // 그 이외
+                        // 그 이외
                     } else {
                         return commonWebSocketHandler.receive(payload);
                     }
@@ -54,20 +54,27 @@ public class WebSocketHandlerTemplate implements WebSocketHandler {
                 })
                 // 세션 만료
                 .doFinally(signal -> {
+                    log.error("세션 만료로 웹소켓을 종료합니다.");
                     commonWebSocketHandler.doFinally(signal);
                     session.close();
                 })
                 .then();
 
+        // receive()
+        Mono<Void> output = commonWebSocketHandler.startSession()
+                .filter(isStart -> isStart)
+                .flatMap(unused -> receive);
+
         // send()
         Mono<Void> send = session.send(commonWebSocketHandler.send()
                 .map(session::textMessage));
 
-        return Mono.when(receive, send);
+        return Mono.when(output, send);
     }
 
     /**
      * url 데이터 파싱
+     *
      * @param uri URI 형식 url
      */
     private Map<String, String> getParamFromSession(URI uri) {

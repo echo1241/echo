@@ -57,4 +57,32 @@ public class TempTest {
                     '}';
         }
     }
+
+    boolean a = true;
+
+    @Test
+    void test34() throws InterruptedException {
+        int i = 1;
+//        Mono<Void> testMono1 = Mono.just("1")
+//                .doOnNext(data -> i++)
+//                .then();
+
+//        return Mono.just("1")
+//                .doOnNext(data -> i++)
+//                .then();
+
+        monoTest().subscribe();
+
+        Thread.sleep(1000);
+    }
+
+    Mono<Void> monoTest() {
+        return Mono.just("1")
+                .doOnNext(data -> System.out.println(a))
+                .doOnNext(data -> a = false)
+                .doOnNext(data -> System.out.println(a))
+                .then();
+
+    }
+
 }

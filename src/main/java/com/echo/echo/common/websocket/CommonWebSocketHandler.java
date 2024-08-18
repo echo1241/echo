@@ -14,6 +14,7 @@ public interface CommonWebSocketHandler {
     Flux<String> send();
     Mono<Void> sendTyping(String payload);
     void init(WebSocketSession webSocketSession, Map<String, String> queryParams, Mono<User> userMono);
+    Mono<Boolean> startSession();
     void doOnSubscribe(Subscription subscription);
     void doFinally(SignalType signal);
     void doOnError(Throwable e);

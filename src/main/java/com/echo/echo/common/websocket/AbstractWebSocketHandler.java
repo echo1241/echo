@@ -2,6 +2,7 @@ package com.echo.echo.common.websocket;
 
 import com.echo.echo.domain.user.entity.User;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Subscription;
 import org.springframework.web.reactive.socket.WebSocketSession;
 import reactor.core.publisher.Flux;
@@ -10,6 +11,7 @@ import reactor.core.publisher.SignalType;
 
 import java.util.Map;
 
+@Slf4j
 @Getter
 public abstract class AbstractWebSocketHandler implements CommonWebSocketHandler {
     private WebSocketSession webSocketSession;
@@ -21,6 +23,11 @@ public abstract class AbstractWebSocketHandler implements CommonWebSocketHandler
         this.webSocketSession = webSocketSession;
         this.queryParams = queryParams;
         this.userMono = userMono;
+    }
+
+    @Override
+    public Mono<Boolean> startSession() {
+        return Mono.just(true);
     }
 
     @Override
@@ -39,7 +46,6 @@ public abstract class AbstractWebSocketHandler implements CommonWebSocketHandler
 
     @Override
     public void doOnSubscribe(Subscription subscription) {
-
     }
 
     @Override
