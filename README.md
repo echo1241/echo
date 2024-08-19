@@ -1,5 +1,7 @@
 <p align="center"> <img src="https://github.com/user-attachments/assets/e11118d4-c536-4811-a3c4-98a476edf558" width=300px> </p>
 
+<div id="table">
+
 # ✏️ Table
 * ### [🏷️ Introduction to the Project](#a)
 * ### [📆 Development Period](#b)
@@ -24,7 +26,7 @@
 
 등의 기능이 구현된 실시간 메신저 커뮤니티 웹 애플리케이션입니다.
 
-[(Back to top)](#-Table)
+[(Back to top)](#table)
 
 <br>
 
@@ -35,7 +37,7 @@
 * ### 개발 : 2024.07.17 - 2024.08.20 / 5주
 * ### 발표 : 2024.08.21(수)
 
-[(Back to top)](#-Table)
+[(Back to top)](#table)
 
 <br>
 
@@ -126,7 +128,7 @@
     </tbody>
 </table>
 
-[(Back to top)](#-Table)
+[(Back to top)](#table)
 
 <br>
 
@@ -146,7 +148,7 @@
 |    Record    |                                                                                                                                          ![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)                                                                                                                                           |                                   -                                    |         [Link](https://teamsparta.notion.site/Echo-191b7395737d4a608c2e07bd98c42f2a)          |
 
 
-[(Back to top)](#-Table)
+[(Back to top)](#table)
 
 <br>
 
@@ -155,7 +157,7 @@
 # 🧱 Project Architecture
 <p align="center"> <img src="https://github.com/user-attachments/assets/cea5df8d-ba85-41c7-a86e-1d538ae31d79"> </p>
 
-[(Back to top)](#-Table)
+[(Back to top)](#table)
 
 <br>
 
@@ -230,7 +232,7 @@ src
 ```
 
 
-[(Back to top)](#-Table)
+[(Back to top)](#table)
 
 <br>
 
@@ -261,15 +263,16 @@ KAKAO_REDIRECT_URI=http://localhost:8080/api/user/kakao/callback
 KAKAO_TOKEN_URL=https://kauth.kakao.com/oauth/token
 ```
 
-[(Back to top)](#-Table)
+[(Back to top)](#table)
 
 <br>
 
 <div id="h">
 
 # 📑 ERD DIAGRAM
+<p align="center"> <img src="https://github.com/user-attachments/assets/ab02d81e-51bb-4c58-9afa-39da53d3ed61"> </p>
 
-[(Back to top)](#-Table)
+[(Back to top)](#table)
 
 <br>
 
@@ -277,6 +280,4 @@ KAKAO_TOKEN_URL=https://kauth.kakao.com/oauth/token
 
 # 🗂️ API Document
 
-[(Back to top)](#-Table)
-
-<br>
+[(Back to top)](#table)
