@@ -55,73 +55,73 @@
         </tr>
         <tr>
             <td>
-                ㆍProject Chief
+                <font size="2">ㆍProject Chief </font>
                 <br>
-                ㆍUser Domain
+                <font size="2">ㆍUser Domain</font>
                 <br>
-                &ensp;&ensp;&ensp;- basic func
+                &ensp;&ensp;<font size="2">&ensp;- basic func</font>
                 <br>
-                ㆍAuth Domain
+                <font size="2">ㆍAuth Domain</font>
                 <br>
-                ㆍThread Domain
+                <font size="2">ㆍThread Domain</font>
                 <br>
-                ㆍGlobal Issue
+                <font size="2">ㆍGlobal Issue</font>
                 <br>
-                ㆍSpring Security
+                <font size="2">ㆍSpring Security</font>
                 <br>
-                ㆍSSE
-                <br>
-            </td>
-            <td>
-                ㆍFront-End Chief
-                <br>
-                ㆍMedia Chat Domain
-                <br>
-                &ensp;&ensp;&ensp;- 1:1 Video
-                <br>
-                ㆍOAuth2 (Kakao)
-                <br>
-                ㆍDirect Message
+                <font size="2">ㆍSSE</font>
                 <br>
             </td>
             <td>
-                ㆍUser Domain
+                <font size="2">ㆍFront-End Chief</font>
                 <br>
-                &ensp;&ensp;&ensp;- additional func
+                <font size="2">ㆍMedia Chat Domain</font>
                 <br>
-                ㆍSpace Domain
+                <font size="2">&ensp;&ensp;&ensp;- 1:1 Video</font>
                 <br>
-                ㆍChannel Domain
+                <font size="2">ㆍOAuth2 (Kakao)</font>
                 <br>
-                ㆍFriend Domain
-                <br>
-                ㆍCI/CD, Deployment 
-                <br>
-                &ensp;&ensp;with AWS and
-                <br>
-                &ensp;&ensp;Github Action
+                <font size="2">ㆍDirect Message</font>
                 <br>
             </td>
             <td>
-                ㆍText Chat
+                <font size="2">ㆍUser Domain</font>
                 <br>
-                &ensp;&ensp;&ensp;- N:M Chat
+                <font size="2">&ensp;&ensp;&ensp;- additional func</font>
                 <br>
-                ㆍS3 Service
+                <font size="2">ㆍSpace Domain</font>
                 <br>
-                ㆍRedis Pub/Sub
+                <font size="2">ㆍChannel Domain</font>
+                <br>
+                <font size="2">ㆍFriend Domain</font>
+                <br>
+                <font size="2">ㆍCI/CD, Deployment</font>
+                <br>
+                <font size="2">&ensp;&ensp;with AWS and</font>
+                <br>
+                <font size="2">&ensp;&ensp;Github Action</font>
                 <br>
             </td>
             <td>
-                ㆍMedia Chat Domain
+                <font size="2">ㆍText Chat</font>
                 <br>
-                &ensp;&ensp;&ensp;- N:M Video
+                <font size="2">&ensp;&ensp;&ensp;- N:M Chat</font>
                 <br>
-                &ensp;&ensp;&ensp;- Screen Sharing
+                <font size="2">ㆍS3 Service</font>
                 <br>
-                ㆍTyping Indicator
+                <font size="2">ㆍRedis Pub/Sub</font>
                 <br>
-                ㆍChat Room User Limit
+            </td>
+            <td>
+                <font size="2">ㆍMedia Chat Domain</font>
+                <br>
+                <font size="2">&ensp;&ensp;&ensp;- N:M Video</font>
+                <br>
+                <font size="2">&ensp;&ensp;&ensp;- Screen Sharing</font>
+                <br>
+                <font size="2">ㆍTyping Indicator</font>
+                <br>
+                <font size="2">ㆍChat Room User Limit</font>
                 <br>
             </td>
         </tr>
