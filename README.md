@@ -55,49 +55,74 @@
         </tr>
         <tr>
             <td>
-                <h5>ㆍProject Chief</h5>
-                <h5>ㆍUser Domain</h5>
-                <h5>&ensp;&ensp;&ensp;- basic func</h5>
-                <h5>ㆍAuth Domain</h5>
-                <h5>ㆍThread Domain</h5>
-                <h5>ㆍGlobal Issue</h5>
-                <h5>ㆍSpring Security</h5>
-                <h5>ㆍSSE</h5>
-                <p>
+                <span style="font-size: 12px">ㆍProject Chief</span>
+                <br>
+                <span style="font-size: 12px">ㆍUser Domain</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- basic func</span>
+                <br>
+                <span style="font-size: 12px">ㆍAuth Domain</span>
+                <br>
+                <span style="font-size: 12px">ㆍThread Domain</span>
+                <br>
+                <span style="font-size: 12px">ㆍGlobal Issue</span>
+                <br>
+                <span style="font-size: 12px">ㆍSpring Security</span>
+                <br>
+                <span style="font-size: 12px">ㆍSSE</span>
+                <br>
             </td>
             <td>
-                <h5>ㆍFront-End Chief</h5>
-                <h5>ㆍMedia Chat Domain</h5>
-                <h5>&ensp;&ensp;&ensp;- 1:1 Video</h5>
-                <h5>ㆍOAuth2 (Kakao)</h5>
-                <h5>ㆍDirect Message</h5>
-                <p>
+                <span style="font-size: 12px">ㆍFront-End Chief</span>
+                <br>
+                <span style="font-size: 12px">ㆍMedia Chat Domain</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- 1:1 Video</span>
+                <br>
+                <span style="font-size: 12px">ㆍOAuth2 (Kakao)</span>
+                <br>
+                <span style="font-size: 12px">ㆍDirect Message</span>
+                <br>
             </td>
             <td>
-                <h5>ㆍUser Domain</h5>
-                <h5>&ensp;&ensp;&ensp;- additional func</h5>
-                <h5>ㆍSpace Domain</h5>
-                <h5>ㆍChannel Domain</h5>
-                <h5>ㆍFriend Domain</h5>
-                <h5>ㆍCI/CD, Deployment</h5>
-                <h5>&ensp;&ensp;with AWS and</h5>
-                <h5>&ensp;&ensp;Github Action</h5>
-                <p>
+                <span style="font-size: 12px">ㆍUser Domain</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- additional func</span>
+                <br>
+                <span style="font-size: 12px">ㆍSpace Domain</span>
+                <br>
+                <span style="font-size: 12px">ㆍChannel Domain</span>
+                <br>
+                <span style="font-size: 12px">ㆍFriend Domain</span>
+                <br>
+                <span style="font-size: 12px">ㆍCI/CD, Deployment</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;with AWS and</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;Github Action</span>
+                <br>
             </td>
             <td>
-                <h5>ㆍText Chat</h5>
-                <h5>&ensp;&ensp;&ensp;- N:M Chat</h5>
-                <h5>ㆍS3 Service</h5>
-                <h5>ㆍRedis Pub/Sub</h5>
-                <p>
+                <span style="font-size: 12px">ㆍText Chat</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- N:M Chat</span>
+                <br>
+                <span style="font-size: 12px">ㆍS3 Service</span>
+                <br>
+                <span style="font-size: 12px">ㆍRedis Pub/Sub</span>
+                <br>
             </td>
             <td>
-                <h5>ㆍMedia Chat Domain</h5>
-                <h5>>&ensp;&ensp;&ensp;- N:M Video</h5>
-                <h5>&ensp;&ensp;&ensp;- Screen Sharing</h5>
-                <h5>ㆍTyping Indicator</h5>
-                <h5>ㆍChat Room User Limit</h5>
-                <p>
+                <span style="font-size: 12px">ㆍMedia Chat Domain</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- N:M Video</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- Screen Sharing</span>
+                <br>
+                <span style="font-size: 12px">ㆍTyping Indicator</span>
+                <br>
+                <span style="font-size: 12px">ㆍChat Room User Limit</span>
+                <br>
             </td>
         </tr>
     </tbody>
