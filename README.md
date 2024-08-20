@@ -279,5 +279,7 @@ KAKAO_TOKEN_URL=https://kauth.kakao.com/oauth/token
 <div id="i">
 
 # 🗂️ API Document
+<p align="center"> <img src="https://github.com/user-attachments/assets/c822d886-c304-44b7-a93c-3b135377cef9"> </p>
+
 
 [(Back to top)](#table)
