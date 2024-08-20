@@ -55,73 +55,73 @@
         </tr>
         <tr>
             <td>
-                <font size="2">ㆍProject Chief </font>
+                <span style="font-size: 12px">ㆍProject Chief</span>
                 <br>
-                <font size="2">ㆍUser Domain</font>
+                <span style="font-size: 12px">ㆍUser Domain</span>
                 <br>
-                &ensp;&ensp;<font size="2">&ensp;- basic func</font>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- basic func</span>
                 <br>
-                <font size="2">ㆍAuth Domain</font>
+                <span style="font-size: 12px">ㆍAuth Domain</span>
                 <br>
-                <font size="2">ㆍThread Domain</font>
+                <span style="font-size: 12px">ㆍThread Domain</span>
                 <br>
-                <font size="2">ㆍGlobal Issue</font>
+                <span style="font-size: 12px">ㆍGlobal Issue</span>
                 <br>
-                <font size="2">ㆍSpring Security</font>
+                <span style="font-size: 12px">ㆍSpring Security</span>
                 <br>
-                <font size="2">ㆍSSE</font>
-                <br>
-            </td>
-            <td>
-                <font size="2">ㆍFront-End Chief</font>
-                <br>
-                <font size="2">ㆍMedia Chat Domain</font>
-                <br>
-                <font size="2">&ensp;&ensp;&ensp;- 1:1 Video</font>
-                <br>
-                <font size="2">ㆍOAuth2 (Kakao)</font>
-                <br>
-                <font size="2">ㆍDirect Message</font>
+                <span style="font-size: 12px">ㆍSSE</span>
                 <br>
             </td>
             <td>
-                <font size="2">ㆍUser Domain</font>
+                <span style="font-size: 12px">ㆍFront-End Chief</span>
                 <br>
-                <font size="2">&ensp;&ensp;&ensp;- additional func</font>
+                <span style="font-size: 12px">ㆍMedia Chat Domain</span>
                 <br>
-                <font size="2">ㆍSpace Domain</font>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- 1:1 Video</span>
                 <br>
-                <font size="2">ㆍChannel Domain</font>
+                <span style="font-size: 12px">ㆍOAuth2 (Kakao)</span>
                 <br>
-                <font size="2">ㆍFriend Domain</font>
-                <br>
-                <font size="2">ㆍCI/CD, Deployment</font>
-                <br>
-                <font size="2">&ensp;&ensp;with AWS and</font>
-                <br>
-                <font size="2">&ensp;&ensp;Github Action</font>
+                <span style="font-size: 12px">ㆍDirect Message</span>
                 <br>
             </td>
             <td>
-                <font size="2">ㆍText Chat</font>
+                <span style="font-size: 12px">ㆍUser Domain</span>
                 <br>
-                <font size="2">&ensp;&ensp;&ensp;- N:M Chat</font>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- additional func</span>
                 <br>
-                <font size="2">ㆍS3 Service</font>
+                <span style="font-size: 12px">ㆍSpace Domain</span>
                 <br>
-                <font size="2">ㆍRedis Pub/Sub</font>
+                <span style="font-size: 12px">ㆍChannel Domain</span>
+                <br>
+                <span style="font-size: 12px">ㆍFriend Domain</span>
+                <br>
+                <span style="font-size: 12px">ㆍCI/CD, Deployment</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;with AWS and</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;Github Action</span>
                 <br>
             </td>
             <td>
-                <font size="2">ㆍMedia Chat Domain</font>
+                <span style="font-size: 12px">ㆍText Chat</span>
                 <br>
-                <font size="2">&ensp;&ensp;&ensp;- N:M Video</font>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- N:M Chat</span>
                 <br>
-                <font size="2">&ensp;&ensp;&ensp;- Screen Sharing</font>
+                <span style="font-size: 12px">ㆍS3 Service</span>
                 <br>
-                <font size="2">ㆍTyping Indicator</font>
+                <span style="font-size: 12px">ㆍRedis Pub/Sub</span>
                 <br>
-                <font size="2">ㆍChat Room User Limit</font>
+            </td>
+            <td>
+                <span style="font-size: 12px">ㆍMedia Chat Domain</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- N:M Video</span>
+                <br>
+                <span style="font-size: 12px">&ensp;&ensp;&ensp;- Screen Sharing<</span>
+                <br>
+                <span style="font-size: 12px">ㆍTyping Indicator</span>
+                <br>
+                <span style="font-size: 12px">ㆍChat Room User Limit</span>
                 <br>
             </td>
         </tr>
