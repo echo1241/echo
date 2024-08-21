@@ -12,6 +12,7 @@
 * ### [🔑 Environment Variable](#g)
 * ### [📑 ERD DIAGRAM](#h)
 * ### [🗂️ API Document](#i)
+* ### [🔫 TroubleShooting](#j)
 <br>
 
 <div id="a">
@@ -281,5 +282,22 @@ KAKAO_TOKEN_URL=https://kauth.kakao.com/oauth/token
 # 🗂️ API Document
 <p align="center"> <img src="https://github.com/user-attachments/assets/691243d4-4c88-403f-af22-7ed51250ef10"> </p>
 
+
+[(Back to top)](#table)
+
+<br>
+
+<div id="j">
+
+# 🔫 Trouble Shooting
+* ### [Webflux Exception 처리 이슈](https://github.com/echo1241/echo/issues/44)
+* ### [WebRTC N:M 연결 시도 시 메시지를 제대로 수신하지 못하는 이슈](https://github.com/echo1241/echo/issues/51)
+* ### [ECS 배포 시 RDS 연결 이슈](https://github.com/echo1241/echo/issues/65)
+* ### [로드 밸런서 설정 이슈](https://github.com/echo1241/echo/issues/66)
+* ### [Webflux AOP @AfterReturning 사용 이슈](https://github.com/echo1241/echo/issues/71)
+* ### [CI/CD 파이프라인 구축 하면서 발생한 문제점 및 해결 방안](https://github.com/echo1241/echo/issues/75)
+* ### [JWT 만료 시 500 에러가 리턴되는 이슈](https://github.com/echo1241/echo/issues/78)
+* ### [채팅 핸들러 내 기능 통합으로 인한 Side Effect](https://github.com/echo1241/echo/issues/104)
+* ### [WebSocket 연결 지속이 안되는 이슈](https://github.com/echo1241/echo/issues/103)
 
 [(Back to top)](#table)
